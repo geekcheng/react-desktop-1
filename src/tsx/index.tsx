@@ -65,12 +65,7 @@ class App extends React.Component<{ widgets: desktop.AppIcon[] },
                 text: "Google",
                 icon: require("../imgs/google.png"),
                 url: "https://www.google.com"
-            },
-            {
-                text: "Source Code",
-                icon: require("../imgs/source.png"),
-                url: "https://github.com/wushilong/react-desktop"
-            },
+            }, 
             {
                 text: "Jolie",
                 icon: require("../imgs/tomb raider.png"),

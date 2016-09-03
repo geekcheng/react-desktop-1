@@ -7,6 +7,6 @@
         "sourceMap": false
     },
     "files": [
-        "./src/tsx/app.tsx"
+        "./src/tsx/index.tsx"
     ]
 }

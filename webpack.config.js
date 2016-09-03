@@ -18,7 +18,7 @@ module.exports = {
         copyWebpackPlugin,
     ],
     entry: {
-        app: ['./src/tsx/app.tsx'],
+        index: ['./src/tsx/index.tsx'],
     },
     output: {
         filename: '[name].js',

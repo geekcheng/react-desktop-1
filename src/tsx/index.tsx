@@ -1,7 +1,7 @@
 /// <reference path="../../typings/tsd.d.ts" />
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-require('../css/app.css');
+require('../css/index.css');
 import * as desktop from "./component/desktop.tsx";
 import * as config from "./config.ts";
 import * as github from "./widgets/github.tsx";
@@ -59,12 +59,17 @@ class App extends React.Component<{ widgets: desktop.AppIcon[] },
             {
                 text: "Bing",
                 icon: require("../imgs/bing.png"),
-                url: "http://www.bing.com"
+                url: "https://www.bing.com"
             },
             {
                 text: "Google",
                 icon: require("../imgs/google.png"),
-                url: "http://www.google.com"
+                url: "https://www.google.com"
+            },
+            {
+                text: "Source Code",
+                icon: require("../imgs/source.png"),
+                url: "https://github.com/wushilong/react-desktop"
             },
             {
                 text: "Jolie",

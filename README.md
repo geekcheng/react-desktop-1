@@ -1,6 +1,6 @@
 # react-desktop
 just one web-desktop
-## demo
+## Demo
  [https://wushilong.github.io/react-desktop/](https://wushilong.github.io/react-desktop/ "react-desktop") 
 ## Installation
 ```bash

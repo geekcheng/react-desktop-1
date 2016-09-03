@@ -1,0 +1,22 @@
+{
+  "name": "react-demo",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "codemonk <codemonk@live.cn>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "^15.3.1",
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.6.3"
+  }
+}

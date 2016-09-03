@@ -1,0 +1,26 @@
+{
+  "name": "react-study",
+  "version": "1.0.0",
+  "description": "my react study",
+  "scripts": {
+    "init": "npm install -g jade typescript typings tsd bower &&tsd install &&typings install &&npm install &&bower install",
+    "jade": "jade ./src/jade -P -w -o ./build",
+    "build": "jade ./src/jade -o ./build && webpack --display-error-details --config webpack.config.prod.js",
+    "dev": "webpack-dev-server --devtool eval --progress --inline --colors --hot --content-base ./build",
+    "watch": "webpack --progress --colors --watch"
+  },
+  "author": "codemonk",
+  "devDependencies": {
+    "copy-webpack-plugin": "^3.0.1",
+    "css-loader": "^0.24.0",
+    "file-loader": "^0.9.0",
+    "jade": "^1.11.0",
+    "style-loader": "^0.13.1",
+    "ts-loader": "^0.8.2",
+    "tsd": "^0.6.5",
+    "typescript": "^1.8.10",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.15.0"
+  }
+}

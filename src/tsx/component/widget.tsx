@@ -119,7 +119,7 @@ export class Widget extends React.Component<{
                 top: self.state.top
             }}>
                 <div className="widget-title widget-move" onMouseDown={e => self.handldeMouseDown.bind(self)(e) }>
-                    <img src={self.props.icon } alt={self.props.title}   />
+                    <img src={self.props.icon || require("../../imgs/default-app-icon.png") } alt={self.props.title}   />
                     <span>{self.props.title}</span>
                 </div>
                 {

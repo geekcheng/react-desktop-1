@@ -7,23 +7,89 @@
 
 .taskbar {
     height: 32px;
-    width: calc(100% - 48x);
-    margin-left: 48px;
+    width: calc(100% - 32x);
+    margin-left: 32px;
     background: linear-gradient( #eaeaea, rgba(0, 0, 0, 0.1), #eaeaea);
 }
 
 .start {
     background: linear-gradient( #eaeaea, rgba(0, 0, 0, 0.1), #eaeaea);
     position: absolute;
-    height: 48px;
-    width: 48px;
+    height: 32px;
+    width: 32px;
     bottom: 0px;
-    margin-left: -48px;
-    border-radius: 0 18px 0 0;
+    margin-left: -32px;
+    border-right: 1px solid black;
+}
+
+.start img {
+    width: 28px;
+    height: 28px;
 }
 
 .start:hover {
     background: linear-gradient( #5e84a7, #ccc, #5e84a7);
+}
+
+.startmenu-cover {
+    width: 100%;
+    height: 100%;
+    background: #000;
+    left: 0;
+    top: 0;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+    position: fixed;
+}
+
+.startmenu-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.startmenu {
+    width: 290px;
+    height: 500px;
+    position: absolute;
+    opacity: 1;
+    background: rgba(244, 244, 244, 0.5);
+    border-radius: 0 0 0 0;
+    bottom: 32px;
+    overflow: auto;
+}
+
+.startmenu-item {
+    height: 48px;
+    width: 280px;
+    margin-left: 5px;
+    margin-top: 5px;
+    background: rgba(244, 244, 244, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.startmenu-item:hover {
+    border: 1px solid black;
+    background: rgba(244, 244, 244, 0.3);
+}
+
+.startmenu-item img {
+    width: 32px;
+    height: 32px;
+    border-radius: 3px;
+    margin-top: 6px;
+    margin-left: 6px;
+}
+
+.startmenu-item span {
+    width: 70px;
+    height: 48px;
+    overflow: hidden;
+    margin-left: 6px;
+    line-height: 48px;
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .taskbar-item {

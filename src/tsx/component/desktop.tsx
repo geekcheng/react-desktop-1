@@ -29,15 +29,19 @@ export class Desktop extends React.Component<{
 }, {
         renderCount?: number,
         openedIcons?: InnerAppIcon[],
-        currentIndex?: number
+        currentIndex?: number,
+        showStartmenu?: boolean
     }> {
+    private hiddenStartmenuing: boolean
     constructor() {
         super();
         let self = this;
         self.state = { renderCount: 0, openedIcons: [], currentIndex: 0 };
         window.onresize = () => {
             self.setState({
-                renderCount: self.state.renderCount + 1,
+                renderCount:
+                self.state.renderCount + 1,
+                showStartmenu: false
             });
         };
         config.config.openUrl = (url, title, icon) => {
@@ -117,7 +121,7 @@ export class Desktop extends React.Component<{
                 zIndex: item.zIndex,
                 left: ((len / windowCount) + len % windowCount) * gap + gap,
                 top: item.top == undefined ? (len % windowCount) * gap + gap : item.top,
-                index: self.objectIndexCount++
+                index: ++self.objectIndexCount
             });
             self.setState({
                 renderCount: self.state.renderCount + 1,
@@ -142,14 +146,12 @@ export class Desktop extends React.Component<{
             if (element.index == icon.index) continue;
             target.push(element);
         }
+        let count = target.length;
         self.setState({
             renderCount: self.state.renderCount + 1,
             openedIcons: target,
-            currentIndex: target.length - 1
+            currentIndex: count > 1 ? target[count - 1].index : 0
         });
-    }
-    private handleClickStartmenu() {
-
     }
     render() {
         let self = this;
@@ -162,26 +164,32 @@ export class Desktop extends React.Component<{
             let rights = self.state.openedIcons;
             windows = rights.map(icon => <widget.Widget
                 content={icon.content} title={icon.title || icon.text} icon={icon.icon} top={icon.top} left={icon.left}
-                zIndex={icon.zIndex ? icon.zIndex : (icon.index == self.state.currentIndex ? 101 : 100) }  show={icon.index == self.state.currentIndex ? true : undefined}
+                zIndex={icon.zIndex ? icon.zIndex : (icon.index == self.state.currentIndex ? 101 : 100) }
+                show={self.state.showStartmenu ? undefined : (self.hiddenStartmenuing ? undefined : (icon.index == self.state.currentIndex ? true : undefined)) }
                 onSelected={w => self.handleSelected.bind(self)(icon, icon.index) }  key={icon.index} url={icon.url}
                 maximum={icon.maximum } covered={icon.covered} onClosd={w => self.handleClose.bind(self)(icon, icon.index, w) }/>)
             tasks = rights.map((icon, index) => <div className="taskbar-item" key={icon.index}  style={
                 {
-                    left: index * 129 + (self.props.showStartmenu ? 50 : 0),
+                    left: index * 129 + (self.props.showStartmenu ? 32 : 0),
                     paddingLeft: 5,
                     background: icon.index == self.state.currentIndex ? 'linear-gradient( #4169E1, rgba(0, 0, 0, 1), #4169E1)' : ''
                 }
-            } onClick={e => self.handleSelected.bind(self)(icon) }>
+            } onClick={e => {
+                self.handleSelected.bind(self)(icon);
+                e.stopPropagation();
+                e.preventDefault();
+            } }>
                 <img src={icon.icon || defaultIconSrc } alt={icon.text}  />
                 <span>{icon.text}</span>
             </div>);
         }
+        if (self.hiddenStartmenuing) self.hiddenStartmenuing = false;
         return <div style={{
             width: '100%',
             height: '100%'
         }}> <div className="desktop">
                 {
-                    self.props.appIcons ? self.props.appIcons.filter(x => !(!x.url && !x.content)).map((item, index) => {
+                    self.props.appIcons ? self.props.appIcons.map((item, index) => {
                         let top = self.itemHeight * (++topIndex) + 10;
                         if (top > h) { top = 10; topIndex = 0; leftIndex++; }
                         let left = self.itemWidth * (leftIndex) + 10;
@@ -200,12 +208,42 @@ export class Desktop extends React.Component<{
                 }
             </div>
             <div className="taskbar">
-                <div className="start" style={{ display: self.props.showStartmenu ? '' : 'none' }} onClick={e => self.handleClickStartmenu.bind(self)() }>
-                    <img src={startIcon} alt="开始"/>
-                </div>
+                {
+                    self.props.showStartmenu ? <div className="start"  onClick={e => {
+                        self.setState({
+                            showStartmenu: true
+                        });
+                        e.stopPropagation();
+                        e.preventDefault();
+                        return true;
+                    } }>
+                        <img src={startIcon} alt="开始"/>
+                    </div> : null
+                }
                 {tasks}
             </div>
-            {windows}
-        </div>;
+            {
+                self.state.showStartmenu ? <div className="startmenu-cover" onClick={e => {
+                    self.hiddenStartmenuing = true;
+                    self.setState({
+                        showStartmenu: false
+                    });
+                    e.stopPropagation();
+                    e.preventDefault();
+                } }>
+                    <div className="startmenu-container">
+                        <div className="startmenu">
+                            { self.props.appIcons ? self.props.appIcons.filter(x => !(!x.url && !x.content)).map((item, index) => { 
+                                return <div  className="startmenu-item" onClick={e => self.handleClick.bind(self)(item) } key={index} >
+                                    <img src={item.icon || defaultIconSrc } alt={item.text}  />
+                                    <span>{item.text}</span>
+                                </div>;
+                            }) : null}
+                        </div>
+                    </div>
+                </div> : null
+            }
+            { windows }
+        </div >;
     }
 };

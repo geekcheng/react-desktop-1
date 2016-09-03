@@ -4,8 +4,9 @@ import * as ReactDOM from "react-dom";
 require('../css/app.css');
 import * as desktop from "./component/desktop.tsx";
 import * as config from "./config.ts";
+import * as github from "./widgets/github.tsx";
 
-class App extends React.Component<{},
+class App extends React.Component<{ widgets: desktop.AppIcon[] },
     {
         errors?: string[],
         renderCount?: number
@@ -27,26 +28,24 @@ class App extends React.Component<{},
     }
     render() {
         let self = this;
-        let errorBox: any;
-        if (self.state.errors) {
-            errorBox = self.state.errors.map((error, index) => <div key={index} style={{
-                position: 'fixed',
-                top: 55 * index + 20,
-                right: 20,
-                width: 300,
-                height: 53,
-                zIndex: 9999999
-            }} className="alert alert-danger alert-dismissible fade in" role="alert">
-                <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                <strong>{  error}</strong>
-            </div>);
-        }
         return <div style={{
             width: '100%',
             height: '100%'
         }}>
-            <desktop.Desktop  appIcons={null} showStartmenu={true}/>
-            {errorBox}
+            <desktop.Desktop  appIcons={self.props.widgets} showStartmenu={true}/>
+            {
+                self.state.errors ? self.state.errors.map((error, index) => <div key={index} style={{
+                    position: 'fixed',
+                    top: 55 * index + 20,
+                    right: 20,
+                    width: 300,
+                    height: 53,
+                    zIndex: 9999999
+                }} className="alert alert-danger alert-dismissible fade in" role="alert">
+                    <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <strong>{error}</strong>
+                </div>) : null
+            }
         </div>;
     }
 }
@@ -55,5 +54,26 @@ class App extends React.Component<{},
     document.body.removeChild(document.getElementById("precontainer"));
     let container = document.getElementById("container");
     container.style.display = '';
-    ReactDOM.render(<App />, container);
+    ReactDOM.render(<App widgets={
+        [
+            {
+                text: "Bing",
+                icon: require("../imgs/bing.png"),
+                url: "http://www.bing.com"
+            },
+            {
+                text: "Google",
+                icon: require("../imgs/google.png"),
+                url: "http://www.google.com"
+            },
+            {
+                text: "Jolie",
+                icon: require("../imgs/tomb raider.png"),
+                content: <img src={require("../imgs/angelina jolie.jpg") } alt='图片查看'  style= {{
+                    maxHeight: 700
+                }} />
+            },
+            github.app
+        ]
+    }/>, container);
 })();

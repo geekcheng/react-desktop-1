@@ -30,7 +30,7 @@ module.exports = {
             loader: 'style-loader!css-loader'
         }, {
             test: /\.(png|jpg|gif|ico)$/,
-            loader: "url?limit=1024&name=[hash:8].[name].[ext]"
+            loader: "url?limit=1024&name=[hash:8].[ext]"
         }, {
             test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
             loader: "url?limit=1024&mimetype=application/font-woff"

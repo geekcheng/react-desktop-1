@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "my react study",
   "scripts": {
-    "init": "npm install -g jade typescript typings tsd bower &&tsd install &&typings install &&npm install &&bower install",
     "jade": "jade ./src/jade -P -w -o ./build",
     "build": "jade ./src/jade -o ./build && webpack --display-error-details --config webpack.config.prod.js",
     "dev": "webpack-dev-server --devtool eval --progress --inline --colors --hot --content-base ./build",

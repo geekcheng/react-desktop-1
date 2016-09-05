@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "my react study",
   "scripts": {
-    "jade": "jade ./src/jade -P -w -o ./build",
-    "build": "jade ./src/jade -o ./build && webpack --display-error-details --config webpack.config.prod.js",
+    "jade": "jade ./src/jade -P -w  -O  {\"debug\":true} -o ./build",
+    "build": "jade ./src/jade -O  {\"debug\":false}  -o ./build && webpack --display-error-details --config webpack.config.prod.js",
     "dev": "webpack-dev-server --devtool eval --progress --inline --colors --hot --content-base ./build",
     "watch": "webpack --progress --colors --watch"
   },
@@ -13,6 +13,7 @@
     "copy-webpack-plugin": "^3.0.1",
     "css-loader": "^0.24.0",
     "file-loader": "^0.9.0",
+    "imagemin-webpack-plugin": "^1.0.8",
     "jade": "^1.11.0",
     "style-loader": "^0.13.1",
     "ts-loader": "^0.8.2",

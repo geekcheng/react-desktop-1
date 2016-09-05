@@ -18,12 +18,30 @@ var copyWebpackPlugin = new CopyWebpackPlugin([{
     from: path.join(__dirname, 'src', 'imgs', 'favicon.ico'),
     to: path.join(__dirname, 'build'),
 }]);
+var ImageminPlugin = require('imagemin-webpack-plugin').default;
+var imageminPlugin = new ImageminPlugin({
+    disable: true,
+    optipng: {
+        optimizationLevel: 4
+    },
+    gifsicle: {
+        optimizationLevel: 1
+    },
+    jpegtran: {
+        progressive: false
+    },
+    svgo: {},
+    pngquant: null,
+    plugins: []
+});
+
 module.exports = {
     plugins: [
         commonsChunkPlugin,
         dedupePlugin,
         copyWebpackPlugin,
-        uglifyJsPlugin
+        uglifyJsPlugin,
+        imageminPlugin
     ],
     entry: {
         index: ['./src/tsx/index.tsx'],
@@ -38,7 +56,7 @@ module.exports = {
             loader: 'style-loader!css-loader'
         }, {
             test: /\.(png|jpg|gif|ico)$/,
-            loader: "url?limit=1024&name=[hash:8].[ext]"
+            loader: "url?limit=1024&name=[hash:16].[ext]"
         }, {
             test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
             loader: "url?limit=1024&mimetype=application/font-woff"

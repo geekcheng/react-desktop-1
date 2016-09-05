@@ -233,7 +233,7 @@ export class Desktop extends React.Component<{
                 } }>
                     <div className="startmenu-container">
                         <div className="startmenu">
-                            { self.props.appIcons ? self.props.appIcons.filter(x => !(!x.url && !x.content)).map((item, index) => { 
+                            { self.props.appIcons ? self.props.appIcons.filter(x => !(!x.url && !x.content)).map((item, index) => {
                                 return <div  className="startmenu-item" onClick={e => self.handleClick.bind(self)(item) } key={index} >
                                     <img src={item.icon || defaultIconSrc } alt={item.text}  />
                                     <span>{item.text}</span>
